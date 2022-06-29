@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionViewBug.MainPage"
+             x:Name="PageInstance">
+  <Grid RowDefinitions="auto,*">
+
+    <Switch Grid.Row="0" IsToggled="{Binding IncludeFieldDescriptions}"/>
+
+    <CollectionView Grid.Row="1" ItemSizingStrategy="MeasureFirstItem" ItemsSource="{Binding AvailableRows}">
+      <CollectionView.ItemTemplate>
+        <DataTemplate>
+          <ContentView>
+            <Frame BackgroundColor="DarkGray">
+              <Grid>
+                <Label Text="{Binding Column2}" IsVisible="{Binding BindingContext.ExcludeFieldDescriptions, Source={x:Reference Name=PageInstance}}" TextColor="White"/>
+                <Label Text="{Binding Column1}" IsVisible="{Binding BindingContext.IncludeFieldDescriptions, Source={x:Reference Name=PageInstance}}" TextColor="Gray"/>
+              </Grid>
+            </Frame>
+          </ContentView>
+        </DataTemplate>
+      </CollectionView.ItemTemplate>
+    </CollectionView>
+    
+  </Grid>
+</ContentPage>
